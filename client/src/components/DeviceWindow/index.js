@@ -7,9 +7,8 @@ import './index.css';
 export class DeviceWindow extends Component {
   startTask = (mode) => {
     let time = 0;
-    if (mode === 'A') time = 3000;
-    if (mode === 'B') time = 2000;
-    if (mode === 'C') time = 1500;
+    if (mode === 'Image') time = 3000;
+    if (mode === 'Video') time = 2000;
     this.props.runMode(mode, time);
   }
 
@@ -19,15 +18,27 @@ export class DeviceWindow extends Component {
     return (
         <div className={`device-panel ${running && 'device-active'}`}>
           <div className='device-name'>
-            Mode {mode}
+            {mode} Mode
           </div>
-          <Button
-            type='primary'
-            ghost
-            icon='caret-right'
-            onClick={() => this.startTask(mode)}
-            disabled={running}
-          >Run</Button>
+          <div className="run-btn-group">
+            <Button
+              type='primary'
+              ghost
+              icon='caret-right'
+              onClick={() => this.startTask(mode)}
+              disabled={running}
+            >Auto(RL)</Button>
+            {
+              mode === 'Image' &&
+              <Button
+                type='primary'
+                ghost
+                icon='caret-right'
+                onClick={() => this.startTask(mode)}
+                disabled={running}
+              >Iteration</Button>
+            }
+          </div>
         </div>
     )
   }

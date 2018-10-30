@@ -50,3 +50,7 @@
         opacity: 0
     }
 }
+
+.run-btn-group :nth-child(2) {
+    margin-left: 10px;
+}

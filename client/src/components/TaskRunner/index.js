@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
 import DataTable from '../DataTable';
 import taskImg from '../../assets/taskimg.jpeg'
 import { connect } from 'react-redux';
 import './index.css';
-
-
-const { Column } = Table;
-
-// <div className='no-task-hint'>No task running currently</div>
 
 export class TaskRunner extends Component {
   render() {

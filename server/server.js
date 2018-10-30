@@ -5,15 +5,26 @@ const fs = require('fs');
 
 const io = require('socket.io')(server);
 
+const sleep = (ms) => new Promise(resolve => setTimeout(() => resolve(), ms))
+
 io.on('connection', (socket) => {
     console.log('user connected');
+
+    // Inform frontend
+    socket.on('ready', () => {
+        console.log('ready');
+        io.emit('ready');
+    })
+
     socket.on('img', (res) => {
-        console.log(res)
-        io.emit('image', `data:image/jpeg;base64,${res}`)
-        // console.log('buf', buf);
-        fs.writeFileSync('./hah.jpg', res, 'base64', function(err) {
-            console.log(err);
-        });
+        /**
+         * res: { 
+         *  frame: String
+         *  fps: Number
+         * }
+         */
+        res.frame = `data:image/jpeg;base64,${res.frame}`;
+        io.emit('image', res);
     })
 
     socket.on('disconnect', function () {

@@ -29,11 +29,6 @@ export default class DataTable extends Component {
           key="averageFrameRate"
         />
         <Column
-          title="Average Latency"
-          dataIndex="averageLatency"
-          key="averageLatency"
-        />
-        <Column
           title="Average Power Consumption"
           dataIndex="averagePowerConsumption"
           key="averagePowerConsumption"

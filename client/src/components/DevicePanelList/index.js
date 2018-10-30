@@ -7,9 +7,8 @@ export default class DevicePanelList extends Component {
     return (
         <div>
             <div className='device-panel-list'>
-                <DeviceWindow mode='A' active/>
-                <DeviceWindow mode='B'/>
-                <DeviceWindow mode='C'/>
+                <DeviceWindow mode='Image' active/>
+                <DeviceWindow mode='Video'/>
             </div>
             <br /><br />
         </div>
