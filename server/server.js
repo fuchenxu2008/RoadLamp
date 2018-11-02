@@ -10,26 +10,41 @@ const sleep = (ms) => new Promise(resolve => setTimeout(() => resolve(), ms))
 io.on('connection', (socket) => {
     console.log('user connected');
 
-    // Inform frontend
-    socket.on('ready', () => {
-        console.log('ready');
-        io.emit('ready');
+    socket.on('start', (mode) => {
+        console.log('Topic: start', mode);
+        io.emit(`start_${mode}`);
     })
 
     socket.on('img', (res) => {
         /**
          * res: { 
-         *  frame: String
-         *  fps: Number
+         *  frame: String,
+         *  fps: Number,
+         *  cut_point: Number
          * }
          */
+        console.log('Topic: img');
         res.frame = `data:image/jpeg;base64,${res.frame}`;
-        io.emit('image', res);
+        io.emit('img', res);
+    });
+
+    socket.on('complete', () => {
+        console.log('complete');
+        io.emit('complete');
+    })
+
+    socket.on('stop', () => {
+        console.log('Topic: stop');
+        io.emit('stop');
     })
 
     socket.on('disconnect', function () {
         console.log('user disconnected');
     });
+
+    socket.on('err', () => {
+        console.log('Topic: err');
+    })
 })
 
 server.listen(3333, () => {

@@ -16,7 +16,3 @@ const database = {
         peakBandwidth: 'N/A',
     }
 }
-
-export const getTaskData = (mode) => {
-    return database[mode];
-}

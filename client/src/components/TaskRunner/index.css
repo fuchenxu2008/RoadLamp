@@ -30,3 +30,41 @@
     box-shadow: 0 5px 30px rgba(143, 143, 143, 0.623);
     border-radius: 5px;
 }
+
+.qtable {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.qtable th {
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+    background-color: grey;
+    /* border: 1px solid black; */
+    color: aliceblue;
+    font-size: 18px;
+}
+
+.qtable tr:nth-child(even) td:nth-child(even) {
+    background-color: rgb(211, 211, 211);
+}
+
+.qtable tr:nth-child(odd) td:nth-child(odd) {
+    background-color: rgb(211, 211, 211);
+}
+
+.qtable td {
+    padding: 15px;
+    text-align: center;
+}
+
+.qtable td:nth-child(1) {
+    background-color: grey !important;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}

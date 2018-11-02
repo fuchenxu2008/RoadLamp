@@ -24,6 +24,11 @@ export default class DataTable extends Component {
           key="analysis"
         />
         <Column
+          title="Accuracy"
+          dataIndex="accuracy"
+          key="accuracy"
+        />
+        <Column
           title="Average Frame Rate"
           dataIndex="averageFrameRate"
           key="averageFrameRate"
@@ -32,11 +37,6 @@ export default class DataTable extends Component {
           title="Average Power Consumption"
           dataIndex="averagePowerConsumption"
           key="averagePowerConsumption"
-        />
-        <Column
-          title="Peak Bandwidth"
-          dataIndex="peakBandwidth"
-          key="peakBandwidth"
         />
       </Table>
     )

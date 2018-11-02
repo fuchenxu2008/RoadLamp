@@ -7,8 +7,14 @@ export default class DevicePanelList extends Component {
     return (
         <div>
             <div className='device-panel-list'>
-                <DeviceWindow mode='Image' active/>
-                <DeviceWindow mode='Video'/>
+                <DeviceWindow
+                    mode='Image'
+                    option={['Auto(RL)', 'Iteration']}
+                />
+                <DeviceWindow
+                    mode='Video'
+                    option={['Auto(RL)']}
+                />
             </div>
             <br /><br />
         </div>

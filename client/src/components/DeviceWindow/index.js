@@ -1,55 +1,53 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
-import { runMode } from '../../actions/task';
+import { runMode, finishMode } from '../../actions/task';
 import './index.css';
 
 export class DeviceWindow extends Component {
   startTask = (mode) => {
-    let time = 0;
-    if (mode === 'Image') time = 3000;
-    if (mode === 'Video') time = 2000;
-    this.props.runMode(mode, time);
+    this.props.runMode(mode, this.props.socket);
   }
 
   render() {
-    const {mode, runningMode} = this.props;
-    const running = mode === runningMode;
+    const { mode, option, runningMode } = this.props;
+    const runningDevice = runningMode ? runningMode.includes(mode) : false;
     return (
-        <div className={`device-panel ${running && 'device-active'}`}>
+        <div className={`device-panel ${runningDevice && 'device-active'}`}>
           <div className='device-name'>
             {mode} Mode
           </div>
           <div className="run-btn-group">
-            <Button
-              type='primary'
-              ghost
-              icon='caret-right'
-              onClick={() => this.startTask(mode)}
-              disabled={running}
-            >Auto(RL)</Button>
-            {
-              mode === 'Image' &&
-              <Button
-                type='primary'
-                ghost
-                icon='caret-right'
-                onClick={() => this.startTask(mode)}
-                disabled={running}
-              >Iteration</Button>
-            }
+            {option.map((opt, i) => {
+              const running = runningMode && runningMode.includes(mode) && runningMode.includes(opt);              
+              return (
+                <Button
+                  key={i}
+                  type='primary'
+                  icon={running ? 'poweroff' : 'caret-right'}
+                  ghost
+                  onClick={() => {
+                      running
+                      ? this.props.finishMode(this.props.socket)
+                      : this.startTask(`${mode}_${opt}`);
+                  }}
+                >{running ? 'Stop' : opt}</Button>
+              )
+            })}
           </div>
         </div>
     )
   }
 }
 
-const mapStateToProps = ({ task }) => ({
+const mapStateToProps = ({task, global}) => ({
   runningMode: task.runningMode,
+  socket: global.socket,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  runMode: (mode, time) => dispatch(runMode(mode, time)),
+  runMode: (mode, socket) => dispatch(runMode(mode, socket)),
+  finishMode: (socket) => dispatch(finishMode(socket))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeviceWindow);
