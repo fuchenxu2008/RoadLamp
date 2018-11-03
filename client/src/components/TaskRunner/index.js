@@ -8,7 +8,7 @@ export class TaskRunner extends Component {
     const { taskData, runningMode, lastRun, taskImg, Q_table } = this.props
     const Q_table_Display = Q_table.map((d1, i1) => (
       <tr key={`1_${i1}`}>
-        <td>{i1}</td>
+        <td>{i1 + 1}</td>
         {d1.map((d2, i2) => (
           <td key={`2_${i2}`}>{d2.toFixed(2)}</td>
         ))}
